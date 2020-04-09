@@ -18,4 +18,11 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="sdb root on&#xD;&#xA;sdb shell &quot;mount -o remount,rw /&quot;&#xD;&#xA;sdb shell &quot;rm /usr/share/dotnet.tizen/framework/*.ni.dll&quot;&#xD;&#xA;sdb push $(TargetDir)Tizen.NUI.Components.dll $(TargetDir)Tizen.NUI.Components.pdb /usr/share/dotnet.tizen/framework/&#xD;&#xA;sdb shell &quot;chsmack -a '_' /usr/share/dotnet.tizen/framework/Tizen.NUI.Components.dll&quot;&#xD;&#xA;sdb shell &quot;chsmack -a '_' /usr/share/dotnet.tizen/framework/Tizen.NUI.Components.pdb&quot;&#xD;&#xA;sdb shell sync&#xD;&#xA;sdb root off" />
+  </Target>
+
+
+  <!-- Include Nuget Package for Tizen Project building -->
+
 </Project>

@@ -34,4 +34,13 @@
     </ItemGroup>
   </Target>
 
+  <ItemGroup>
+    <None Update="res\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="sdb root on &#xD;&#xA;sdb shell &quot;mount -o remount,rw /&quot;&#xD;&#xA;sdb shell &quot;rm /usr/share/dotnet.tizen/framework/*.ni.dll&quot;&#xD;&#xA;sdb push $(TargetDir)Tizen.NUI.dll $(TargetDir)Tizen.NUI.pdb /usr/share/dotnet.tizen/framework/&#xD;&#xA;sdb shell &quot;chsmack -a '_' /usr/share/dotnet.tizen/framework/Tizen.NUI.dll&quot;&#xD;&#xA;sdb shell &quot;chsmack -a '_' /usr/share/dotnet.tizen/framework/Tizen.NUI.pdb&quot;&#xD;&#xA;sdb shell sync&#xD;&#xA;sdb root off" />
+  </Target>
+
 </Project>

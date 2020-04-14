@@ -16,7 +16,6 @@
  */
 using System.ComponentModel;
 using Tizen.NUI.BaseComponents;
-using Tizen.NUI.Binding;
 
 namespace Tizen.NUI.Components.Extension
 {
@@ -24,18 +23,19 @@ namespace Tizen.NUI.Components.Extension
     /// LottieSwitchStyle implements ILottieButtonStyle interface to support extended ButtonStyle using Lottie.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class LottieSwitchStyle : SwitchStyle, ILottieButtonStyle
+    public class LottieSwitchStyle : SwitchStyle
     {
         static LottieSwitchStyle()
         {
         }
 
         /// <summary>
-        /// Create new instance of a LottieButtonStyle.
+        /// Create new instance of a LottieSwitchStyle.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public LottieSwitchStyle() : base()
         {
+            IconView = new LottieAnimationView();
         }
 
         /// <summary>
@@ -43,42 +43,6 @@ namespace Tizen.NUI.Components.Extension
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public LottieSwitchStyle(LottieSwitchStyle style) : base(style)
-        {
-        }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public string LottieUrl { get; set; }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Selector<LottieFrameInfo> PlayRange { get; set; }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void CopyFrom(BindableObject bindableObject)
-        {
-            base.CopyFrom(bindableObject);
-
-            LottieSwitchStyle style = bindableObject as LottieSwitchStyle;
-
-            if (style == null)
-            {
-                return;
-            }
-
-            LottieUrl = style.LottieUrl;
-            PlayRange = style.PlayRange;
-        }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override ButtonExtension CreateExtension()
-        {
-            return new LottieSwitchExtension();
-        }
-
-        private void InitSubStyle()
         {
         }
     }

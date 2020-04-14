@@ -121,6 +121,25 @@ namespace Tizen.NUI.Components
             var instance = (Button)bindable;
             return instance.Style?.TextPadding;
         });
+        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty IconViewProperty = BindableProperty.Create("IconView", typeof(ImageView), typeof(Button), null, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var instance = (Button)bindable;
+
+            instance.ButtonIcon = (ImageView)newValue;
+            instance.Add(instance.ButtonIcon);
+
+            if (instance.ButtonIcon == null)
+                instance.ButtonIcon = new ImageView();
+
+        },
+        defaultValueCreator: (bindable) =>
+        {
+            var instance = (Button)bindable;
+
+            return new ImageView();
+        });
 
         private EventHandler<StateChangedEventArgs> stateChangeHander;
 
@@ -166,16 +185,6 @@ namespace Tizen.NUI.Components
         protected virtual TextLabel CreateText()
         {
             return new TextLabel();
-        }
-
-        /// <summary>
-        /// Creates Button's icon part.
-        /// </summary>
-        /// <return>The created Button's icon part.</return>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        protected virtual ImageView CreateIcon()
-        {
-            return new ImageView();
         }
 
         /// <summary>
@@ -429,13 +438,15 @@ namespace Tizen.NUI.Components
         {
             get
             {
-                return Style?.Icon?.ResourceUrl?.All;
+                ImageViewStyle style = Style?.Icon as ImageViewStyle;
+                return style?.ResourceUrl?.All;
             }
             set
             {
                 if (null != Style?.Icon)
                 {
-                    Style.Icon.ResourceUrl = value;
+                    ImageViewStyle style = Style.Icon as ImageViewStyle;
+                    style.ResourceUrl = value;
                 }
             }
         }
@@ -916,7 +927,6 @@ namespace Tizen.NUI.Components
         private void CreateComponents()
         {
             ButtonOverlayImage = CreateOverlayImage();
-            ButtonIcon = CreateIcon();
             ButtonText = CreateText();
 
             if (Extension == null)
@@ -926,7 +936,6 @@ namespace Tizen.NUI.Components
 
             // Update component with extension
             ButtonOverlayImage = Extension.OnCreateOverlayImage(this, ButtonOverlayImage);
-            ButtonIcon = Extension.OnCreateIcon(this, ButtonIcon);
             ButtonText = Extension.OnCreateText(this, ButtonText);
         }
 

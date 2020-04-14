@@ -19,6 +19,7 @@ using global::System;
 using global::System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Collections.Generic;
+using Tizen.NUI.Binding;
 
 namespace Tizen.NUI.BaseComponents
 {
@@ -32,6 +33,7 @@ namespace Tizen.NUI.BaseComponents
     /// <since_tizen> 7 </since_tizen>
     public class LottieAnimationView : ImageView
     {
+        static LottieAnimationView() { }
         #region Constructor, Distructor, Dispose
         /// <summary>
         /// LottieAnimationView constructor
@@ -63,6 +65,21 @@ namespace Tizen.NUI.BaseComponents
             currentStates.totalFrame = -1;
             currentStates.scale = scale;
             SetVisible(shown);
+        }
+
+        public LottieAnimationView(ViewStyle viewStyle) : this()
+        {
+            currentStates.frame = -1;
+            currentStates.loopCount = 1;
+            currentStates.loopMode = LoopingModeType.Restart;
+            currentStates.stopEndAction = StopBehaviorType.CurrentFrame;
+            currentStates.framePlayRangeMin = -1;
+            currentStates.framePlayRangeMax = -1;
+            currentStates.changed = false;
+            currentStates.totalFrame = -1;
+            currentStates.scale = 1.0f;
+            SetVisible(true);
+            ApplyStyle(viewStyle);
         }
 
         /// <summary>
@@ -99,6 +116,65 @@ namespace Tizen.NUI.BaseComponents
 
 
         #region Property
+        /// <summary>
+        /// Style of the button.
+        /// </summary>
+        /// <since_tizen> 8 </since_tizen>
+
+        internal static readonly BindableProperty PlayRangeSelectorProperty = BindableProperty.Create("PlayRangeSelector", typeof(Selector<LottieFrameInfo>), typeof(LottieAnimationView), null, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var lottieAnimationView = (LottieAnimationView)bindable;
+
+            lottieAnimationView.playRangeSelector.Clone((Selector<LottieFrameInfo>)newValue);
+        },
+        defaultValueCreator: (bindable) =>
+        {
+            var lottieAnimationView = (LottieAnimationView)bindable;
+           
+            return lottieAnimationView.playRangeSelector;
+        });
+        private TriggerableSelector<LottieFrameInfo> _playRangeSelector;
+        private TriggerableSelector<LottieFrameInfo> playRangeSelector
+        {
+            get
+            {
+                if (null == _playRangeSelector)
+                {
+                    _playRangeSelector = new TriggerableSelector<LottieFrameInfo>(this, PlayRangeProperty);
+                }
+                return _playRangeSelector;
+            }
+        }
+
+        public static readonly BindableProperty PlayRangeProperty = BindableProperty.Create("PlayRange", typeof(LottieFrameInfo), typeof(LottieAnimationView), null, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var view = (LottieAnimationView)bindable;
+            if (newValue != null)
+            {
+                LottieFrameInfo newFrameInfo = (LottieFrameInfo)newValue;
+                if ((newFrameInfo.StartFrame <= view.CurrentFrame) && (view.CurrentFrame <= newFrameInfo.EndFrame))
+                    return;
+                newFrameInfo.Show(view);
+            }
+        },
+        defaultValueCreator: (bindable) =>
+        {
+            var lottieAnimationView = (LottieAnimationView)bindable;
+
+            return new LottieFrameInfo(0);
+        });
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static readonly BindableProperty LottieUrlProperty = BindableProperty.Create("LottieUrl", typeof(string), typeof(LottieAnimationView), null, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var view = (LottieAnimationView)bindable;
+            view.URL = (string)newValue;
+        },
+        defaultValueCreator: (bindable) =>
+        {
+            return "";
+        });
+
         /// <summary>
         /// Set or Get resource URL of Lottie file.
         /// </summary>

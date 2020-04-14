@@ -120,6 +120,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public ButtonStyle() : base()
         {
+            IconView = new ImageView();
             InitSubStyle();
         }
 
@@ -139,6 +140,30 @@ namespace Tizen.NUI.Components
 
             this.CopyFrom(style);
         }
+
+        public static readonly BindableProperty IconViewProperty = BindableProperty.Create(nameof(IconView), typeof(ImageView), typeof(ButtonStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
+        {
+            var view = (ButtonStyle)bindable;
+            view.iconView = (ImageView)newValue;
+        },
+        defaultValueCreator: (bindable) =>
+        {
+            var view = (ButtonStyle)bindable;
+
+            return view.iconView;
+        });
+
+        private ImageView iconView;
+        public virtual ImageView IconView
+        {
+            get
+            {
+                ImageView view = (ImageView)GetValue(IconViewProperty);
+                return (null != view) ? view : new ImageView();
+            }
+            protected set => SetValue(IconViewProperty, value);
+        }
+
         /// <summary>
         /// Overlay image's Style.
         /// </summary>
@@ -155,7 +180,7 @@ namespace Tizen.NUI.Components
         /// Icon's Style.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle Icon { get; set; }
+        public ViewStyle Icon { get; set; }
 
         /// <summary>
         /// Flag to decide Button can be selected or not.

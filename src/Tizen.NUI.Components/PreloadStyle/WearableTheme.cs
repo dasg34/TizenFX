@@ -71,11 +71,14 @@ namespace Tizen.NUI.Components
         {
             return new LottieButtonStyle
             {
-                LottieUrl = StyleManager.GetFrameworkResourcePath("nui_wearable_checkbox_icon.json"),
-                PlayRange = new Selector<LottieFrameInfo>
-                {
-                    Selected = (0, 18),
-                    Normal = (19, 36)
+                Icon = new LottieStyle
+                { 
+                    LottieUrl = StyleManager.GetFrameworkResourcePath("nui_wearable_checkbox_icon.json"),
+                    PlayRange = new Selector<LottieFrameInfo>
+                    {
+                        Selected = (0, 18),
+                        Normal = (19, 36)
+                    },
                 },
                 Opacity = new Selector<float?>
                 {
@@ -90,11 +93,14 @@ namespace Tizen.NUI.Components
         {
             return new LottieButtonStyle
             {
-                LottieUrl = StyleManager.GetFrameworkResourcePath("nui_wearable_radiobutton_icon.json"),
-                PlayRange = new Selector<LottieFrameInfo>
+                Icon = new LottieStyle
                 {
-                    Selected = (0, 12),
-                    Normal = (13, 25)
+                    LottieUrl = StyleManager.GetFrameworkResourcePath("nui_wearable_radiobutton_icon.json"),
+                    PlayRange = new Selector<LottieFrameInfo>
+                    {
+                        Selected = (0, 12),
+                        Normal = (13, 25)
+                    },
                 },
                 Opacity = new Selector<float?>
                 {
@@ -109,11 +115,14 @@ namespace Tizen.NUI.Components
         {
             return new LottieSwitchStyle
             {
-                LottieUrl = StyleManager.GetFrameworkResourcePath("nui_wearable_switch_icon.json"),
-                PlayRange = new Selector<LottieFrameInfo>
+                Icon = new LottieStyle
                 {
-                    Selected = (0, 18),
-                    Normal = (19, 36)
+                    LottieUrl = StyleManager.GetFrameworkResourcePath("nui_wearable_switch_icon.json"),
+                    PlayRange = new Selector<LottieFrameInfo>
+                    {
+                        Selected = (0, 18),
+                        Normal = (19, 36)
+                    },
                 },
                 Opacity = new Selector<float?>
                 {

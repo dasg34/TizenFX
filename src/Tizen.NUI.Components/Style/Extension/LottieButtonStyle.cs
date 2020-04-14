@@ -24,7 +24,7 @@ namespace Tizen.NUI.Components.Extension
     /// LottieButtonStyle implements ILottieButtonStyle interface to support extended ButtonStyle using Lottie.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class LottieButtonStyle : ButtonStyle, ILottieButtonStyle
+    public class LottieButtonStyle : ButtonStyle
     {
         static LottieButtonStyle()
         {
@@ -36,6 +36,7 @@ namespace Tizen.NUI.Components.Extension
         [EditorBrowsable(EditorBrowsableState.Never)]
         public LottieButtonStyle() : base()
         {
+            IconView = new LottieAnimationView();
         }
 
         /// <summary>
@@ -44,38 +45,6 @@ namespace Tizen.NUI.Components.Extension
         [EditorBrowsable(EditorBrowsableState.Never)]
         public LottieButtonStyle(LottieButtonStyle style) : base(style)
         {
-        }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public string LottieUrl { get; set; }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Selector<LottieFrameInfo> PlayRange { get; set; }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void CopyFrom(BindableObject bindableObject)
-        {
-            base.CopyFrom(bindableObject);
-
-            LottieButtonStyle style = bindableObject as LottieButtonStyle;
-
-            if (style == null)
-            {
-                return;
-            }
-
-            LottieUrl = style.LottieUrl;
-            PlayRange = style.PlayRange;
-        }
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override ButtonExtension CreateExtension()
-        {
-            return new LottieButtonExtension();
         }
     }
 }

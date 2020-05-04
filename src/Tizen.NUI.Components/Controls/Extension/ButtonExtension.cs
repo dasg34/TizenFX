@@ -26,6 +26,12 @@ namespace Tizen.NUI.Components.Extension
     public abstract class ButtonExtension
     {
         /// <summary>
+        /// The Touch info to get current touch position.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        protected Touch TouchInfo { get; private set; }
+
+        /// <summary>
         /// Called immediately after the Button creates the text part.
         /// </summary>
         /// <param name="button">The Button instance that the extension currently applied to.</param>
@@ -66,9 +72,8 @@ namespace Tizen.NUI.Components.Extension
         /// </summary>
         /// <param name="button">The Button instance that the extension currently applied to.</param>
         /// <param name="previousState">The previous contol state of the Button.</param>
-        /// <param name="touchInfo">The touch information in case the state has changed by touching.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void OnControlStateChanged(Button button, ControlStates previousState, Touch touchInfo)
+        public virtual void OnControlStateChanged(Button button, ControlStates previousState)
         {
         }
 
@@ -99,5 +104,12 @@ namespace Tizen.NUI.Components.Extension
         public virtual void OnDispose(Button button)
         {
         }
-  }
+
+        /// <summary>
+        /// Set the Touch Info.
+        /// </summary>
+        /// <param name="touch">The Touch Info.</param>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SetTouchInfo(Touch touch) => TouchInfo = touch;
+    }
 }

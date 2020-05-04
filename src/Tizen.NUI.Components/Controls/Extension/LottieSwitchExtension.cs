@@ -54,9 +54,9 @@ namespace Tizen.NUI.Components.Extension
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void OnControlStateChanged(Button button, ControlStates previousState, Touch touchInfo)
+        public override void OnControlStateChanged(Button button, ControlStates previousState)
         {
-            LottieButtonExtension.UpdateLottieView(button, previousState, touchInfo, LottieView);
+            LottieButtonExtension.UpdateLottieView(button, previousState, LottieView);
         }
     }
 }

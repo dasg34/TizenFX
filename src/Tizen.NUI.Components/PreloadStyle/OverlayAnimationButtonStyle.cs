@@ -102,7 +102,7 @@ namespace Tizen.NUI.Components
 
         /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void OnControlStateChanged(Button button, ControlStates previousState, Touch touchInfo)
+        public override void OnControlStateChanged(Button button, ControlStates previousState)
         {
             if (button.ControlState != ControlStates.Pressed)
             {

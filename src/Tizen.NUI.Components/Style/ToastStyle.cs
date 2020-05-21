@@ -47,7 +47,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ToastStyle() : base()
         {
-            InitSubStyle();
         }
 
         /// <summary>
@@ -85,21 +84,6 @@ namespace Tizen.NUI.Components
             {
                 Text.CopyFrom(toastStyle.Text);
             }
-        }
-
-        private void InitSubStyle()
-        {
-            Text = new TextLabelStyle()
-            {
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.Center,
-                PivotPoint = Tizen.NUI.PivotPoint.Center,
-                WidthResizePolicy = ResizePolicyType.UseNaturalSize,
-                HeightResizePolicy = ResizePolicyType.UseNaturalSize,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                TextColor = Tizen.NUI.Color.White,
-            };
         }
     }
 }

@@ -874,6 +874,31 @@ namespace Tizen.NUI.BaseComponents
         }
 
         /// <summary>
+        /// Create a new instance from string.
+        /// Possible input : "0, 10", "10"
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static implicit operator LottieFrameInfo(string pair)
+        {
+            if (pair == null)
+            {
+                return null;
+            }
+
+            string[] parts = pair.Split(',');
+            if (parts.Length == 1)
+            {
+                return new LottieFrameInfo(Int32.Parse(parts[0].Trim()));
+            }
+            else if (parts.Length == 2)
+            {
+                return new LottieFrameInfo(Int32.Parse(parts[0].Trim()), Int32.Parse(parts[1].Trim()));
+            }
+
+            throw new InvalidCastException($"Can not convert string {pair} to LottieFrameInfo");
+        }
+
+        /// <summary>
         /// The start frame of the lottie animation.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]

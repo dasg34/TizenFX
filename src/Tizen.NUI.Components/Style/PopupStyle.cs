@@ -34,7 +34,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public PopupStyle() : base()
         {
-            InitSubStyle();
         }
 
         /// <summary>
@@ -69,52 +68,6 @@ namespace Tizen.NUI.Components
                 Title.CopyFrom(popupStyle.Title);
                 Buttons.CopyFrom(popupStyle.Buttons);
             }
-        }
-
-        private void InitSubStyle()
-        {
-            // TODO Apply proper shadow as a default for a Popup
-            BoxShadow = new Shadow()
-            {
-                BlurRadius = 5,
-                Offset = new Vector2(5, 5),
-            };
-
-            Title = new TextLabelStyle()
-            {
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.TopLeft,
-                PivotPoint = Tizen.NUI.PivotPoint.TopLeft,
-                HorizontalAlignment = HorizontalAlignment.Begin,
-                VerticalAlignment = VerticalAlignment.Bottom
-            };
-
-            Buttons = new ButtonStyle()
-            {
-                Size = new Size(0, 0),
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.BottomLeft,
-                PivotPoint = Tizen.NUI.PivotPoint.BottomLeft,
-                Overlay = new ImageViewStyle()
-                {
-                    PositionUsesPivotPoint = true,
-                    ParentOrigin = Tizen.NUI.ParentOrigin.Center,
-                    PivotPoint = Tizen.NUI.PivotPoint.Center,
-                    WidthResizePolicy = ResizePolicyType.FillToParent,
-                    HeightResizePolicy = ResizePolicyType.FillToParent
-                },
-
-                Text = new TextLabelStyle()
-                {
-                    PositionUsesPivotPoint = true,
-                    ParentOrigin = Tizen.NUI.ParentOrigin.Center,
-                    PivotPoint = Tizen.NUI.PivotPoint.Center,
-                    WidthResizePolicy = ResizePolicyType.FillToParent,
-                    HeightResizePolicy = ResizePolicyType.FillToParent,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center
-                }
-            };
         }
     }
 }

@@ -75,7 +75,7 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty TrackColorProperty = BindableProperty.Create(nameof(TrackColor), typeof(Color), typeof(CircularSliderStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            ((CircularSliderStyle)bindable).trackColor = (Color)newValue;
+            ((CircularSliderStyle)bindable).trackColor = newValue == null ? null : new Color((Color)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -86,7 +86,7 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty ProgressColorProperty = BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularSliderStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            ((CircularSliderStyle)bindable).progressColor = (Color)newValue;
+            ((CircularSliderStyle)bindable).progressColor = newValue == null ? null : new Color((Color)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -108,7 +108,7 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty ThumbColorProperty = BindableProperty.Create(nameof(ThumbColor), typeof(Color), typeof(CircularSliderStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            ((CircularSliderStyle)bindable).thumbColor = (Color)newValue;
+            ((CircularSliderStyle)bindable).thumbColor = newValue == null ? null : new Color((Color)newValue);
         },
         defaultValueCreator: (bindable) =>
         {

@@ -76,12 +76,7 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly BindableProperty TrackPaddingProperty = BindableProperty.Create(nameof(TrackPadding), typeof(Extents), typeof(SliderStyle), null, propertyChanged: (bindable, oldValue, newValue) =>
         {
-            var instance = (SliderStyle)bindable;
-            if (newValue != null)
-            {
-                if (null == instance.trackPadding) instance.trackPadding = new Extents(instance.OnTrackPaddingChanged, 0, 0, 0, 0);
-                instance.trackPadding.CopyFrom(null == newValue ? new Extents() : (Extents)newValue);
-            }
+            ((SliderStyle)bindable).trackPadding = newValue == null ? null : new Extents((Extents)newValue);
         },
         defaultValueCreator: (bindable) =>
         {
@@ -89,7 +84,7 @@ namespace Tizen.NUI.Components
             return instance.trackPadding;
         });
 
-        private IndicatorType? privateIndicatorType;
+        private IndicatorType? privateIndicatorType = Slider.IndicatorType.None;
         private uint? privateTrackThickness;
         private uint? privateSpaceBetweenTrackAndIndicator;
         private Extents trackPadding;
@@ -102,8 +97,6 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public SliderStyle() : base()
         {
-            IndicatorType = Slider.IndicatorType.None;
-            InitSubStyle();
         }
 
         /// <summary>
@@ -193,11 +186,7 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public Extents TrackPadding
         {
-            get
-            {
-                Extents tmp = (Extents)GetValue(TrackPaddingProperty);
-                return (null != tmp) ? tmp : trackPadding = new Extents(OnTrackPaddingChanged, 0, 0, 0, 0);
-            }
+            get => ((Extents)GetValue(TrackPaddingProperty)) ?? (trackPadding = new Extents(0, 0, 0, 0));
             set => SetValue(TrackPaddingProperty, value);
         }
 
@@ -240,22 +229,6 @@ namespace Tizen.NUI.Components
             }
 
             base.Dispose(type);
-        }
-
-        private void InitSubStyle()
-        {
-            Track = new ImageViewStyle();
-            Progress = new ImageViewStyle();
-            Thumb = new ImageViewStyle();
-            LowIndicatorImage = new ImageViewStyle();
-            HighIndicatorImage = new ImageViewStyle();
-            LowIndicator = new TextLabelStyle();
-            HighIndicator = new TextLabelStyle();
-        }
-
-        private void OnTrackPaddingChanged(ushort start, ushort end, ushort top, ushort bottom)
-        {
-            TrackPadding = new Extents(start, end, top, bottom);
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public ProgressStyle() : base()
         {
-            InitSubStyle();
         }
 
         /// <summary>
@@ -79,36 +78,6 @@ namespace Tizen.NUI.Components
                 Progress.CopyFrom(progressStyle.Progress);
                 Buffer.CopyFrom(progressStyle.Buffer);
             }
-        }
-
-        private void InitSubStyle()
-        {
-            Track = new ImageViewStyle()
-            {
-                WidthResizePolicy = ResizePolicyType.FillToParent,
-                HeightResizePolicy = ResizePolicyType.FillToParent,
-                PositionUsesPivotPoint = true,
-                ParentOrigin = NUI.ParentOrigin.TopLeft,
-                PivotPoint = NUI.PivotPoint.TopLeft
-            };
-
-            Progress = new ImageViewStyle()
-            {
-                WidthResizePolicy = ResizePolicyType.FillToParent,
-                HeightResizePolicy = ResizePolicyType.FillToParent,
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.TopLeft,
-                PivotPoint = Tizen.NUI.PivotPoint.TopLeft
-            };
-
-            Buffer = new ImageViewStyle()
-            {
-                WidthResizePolicy = ResizePolicyType.FillToParent,
-                HeightResizePolicy = ResizePolicyType.FillToParent,
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.TopLeft,
-                PivotPoint = Tizen.NUI.PivotPoint.TopLeft
-            };
         }
     }
 }

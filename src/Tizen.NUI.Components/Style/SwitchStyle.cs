@@ -35,7 +35,6 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public SwitchStyle() : base()
         {
-            InitSubStyle();
         }
 
         /// <summary>
@@ -80,28 +79,6 @@ namespace Tizen.NUI.Components
         public override ButtonExtension CreateExtension()
         {
             return new SlidingSwitchExtension();
-        }
-
-        private void InitSubStyle()
-        {
-            IsSelectable = true;
-            Track = new ImageViewStyle()
-            {
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.CenterLeft,
-                PivotPoint = Tizen.NUI.PivotPoint.CenterLeft,
-                WidthResizePolicy = ResizePolicyType.FillToParent,
-                HeightResizePolicy = ResizePolicyType.FillToParent
-            };
-
-            Thumb = new ImageViewStyle()
-            {
-                PositionUsesPivotPoint = true,
-                ParentOrigin = Tizen.NUI.ParentOrigin.CenterLeft,
-                PivotPoint = Tizen.NUI.PivotPoint.CenterLeft,
-                WidthResizePolicy = ResizePolicyType.Fixed,
-                HeightResizePolicy = ResizePolicyType.Fixed
-            };
         }
     }
 }

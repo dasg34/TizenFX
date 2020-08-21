@@ -835,7 +835,7 @@ namespace Tizen.NUI.BaseComponents
     /// A class containing frame informations for a LottieAnimationView.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public class LottieFrameInfo
+    public class LottieFrameInfo : ISelectorItem
     {
         /// <summary>
         /// Creates a new instance with a playing range.
@@ -939,6 +939,10 @@ namespace Tizen.NUI.BaseComponents
                 lottieView.Play();
             }
         }
+
+        /// <inheritdoc/>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public object Clone() => new LottieFrameInfo(StartFrame, EndFrame);
 
         private bool BeReadyToShow(LottieAnimationView lottieView)
         {

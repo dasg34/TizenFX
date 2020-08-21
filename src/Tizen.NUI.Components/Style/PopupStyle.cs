@@ -44,44 +44,30 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public PopupStyle(PopupStyle style) : base(style)
         {
-            Title = new TextLabelStyle();
-            Buttons = new ButtonStyle();
-            this.CopyFrom(style);
         }
 
         /// <summary>
         /// Title Text's style.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public TextLabelStyle Title { get; set; }
+        public TextLabelStyle Title { get; set; } = new TextLabelStyle();
 
         /// <summary>
         /// Popup button's style.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public ButtonStyle Buttons { get; set; }
+        public ButtonStyle Buttons { get; set; } = new ButtonStyle();
 
-        /// <summary>
-        /// Style's clone function.
-        /// </summary>
-        /// <param name="bindableObject">The style that need to copy.</param>
+        /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void CopyFrom(BindableObject bindableObject)
         {
             base.CopyFrom(bindableObject);
 
-            PopupStyle popupStyle = bindableObject as PopupStyle;
-            if (popupStyle != null)
+            if (bindableObject is PopupStyle popupStyle)
             {
-                if (popupStyle.Title != null)
-                {
-                    Title?.CopyFrom(popupStyle.Title);
-                }
-
-                if (popupStyle.Buttons != null)
-                {
-                    Buttons?.CopyFrom(popupStyle.Buttons);
-                }
+                Title.CopyFrom(popupStyle.Title);
+                Buttons.CopyFrom(popupStyle.Buttons);
             }
         }
 

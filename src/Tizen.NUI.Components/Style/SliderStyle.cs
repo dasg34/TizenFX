@@ -113,59 +113,49 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public SliderStyle(SliderStyle style) : base(style)
         {
-            if(style == null)
-            {
-                return;
-            }
-
-            InitSubStyle();
-
-            this.CopyFrom(style);
-
-            IndicatorType = style.IndicatorType;
         }
 
         /// <summary>
         /// Get or set background track.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle Track { get; set; }
+        public ImageViewStyle Track { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Get or set slided track.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle Progress { get; set; }
+        public ImageViewStyle Progress { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Get or set thumb.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle Thumb { get; set; }
+        public ImageViewStyle Thumb { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Get or set low indicator image.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle LowIndicatorImage { get; set; }
+        public ImageViewStyle LowIndicatorImage { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Get or set high indicator image.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle HighIndicatorImage { get; set; }
+        public ImageViewStyle HighIndicatorImage { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Get or set low indicator text.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public TextLabelStyle LowIndicator { get; set; }
+        public TextLabelStyle LowIndicator { get; set; } = new TextLabelStyle();
 
         /// <summary>
         /// Get or set high indicator text.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public TextLabelStyle HighIndicator { get; set; }
+        public TextLabelStyle HighIndicator { get; set; } = new TextLabelStyle();
 
         /// <summary>
         /// Get or set Indicator type
@@ -220,54 +210,15 @@ namespace Tizen.NUI.Components
         {
             base.CopyFrom(bindableObject);
 
-            SliderStyle sliderStyle = bindableObject as SliderStyle;
-
-            if (null != sliderStyle)
+            if (bindableObject is SliderStyle sliderStyle)
             {
-                if (sliderStyle.Track != null)
-                {
-                    Track?.CopyFrom(sliderStyle.Track);
-                }
-
-                if (sliderStyle.Progress != null)
-                {
-                    Progress?.CopyFrom(sliderStyle.Progress);
-                }
-
-                if (sliderStyle.Thumb != null)
-                {
-                    Thumb?.CopyFrom(sliderStyle.Thumb);
-                }
-
-                if (sliderStyle.LowIndicatorImage != null)
-                {
-                    LowIndicatorImage?.CopyFrom(sliderStyle.LowIndicatorImage);
-                }
-
-                if (sliderStyle.HighIndicatorImage != null)
-                {
-                    HighIndicatorImage?.CopyFrom(sliderStyle.HighIndicatorImage);
-                }
-
-                if (sliderStyle.LowIndicator != null)
-                {
-                    LowIndicator?.CopyFrom(sliderStyle.LowIndicator);
-                }
-
-                if (sliderStyle.HighIndicator != null)
-                {
-                    HighIndicator?.CopyFrom(sliderStyle.HighIndicator);
-                }
-
-                if (sliderStyle.TrackThickness != null)
-                {
-                    TrackThickness = sliderStyle.TrackThickness;
-                }
-
-                if (sliderStyle.TrackPadding != null)
-                {
-                    TrackPadding = sliderStyle.TrackPadding;
-                }
+                Track.CopyFrom(sliderStyle.Track);
+                Progress.CopyFrom(sliderStyle.Progress);
+                Thumb.CopyFrom(sliderStyle.Thumb);
+                LowIndicatorImage.CopyFrom(sliderStyle.LowIndicatorImage);
+                HighIndicatorImage.CopyFrom(sliderStyle.HighIndicatorImage);
+                LowIndicator.CopyFrom(sliderStyle.LowIndicator);
+                HighIndicator.CopyFrom(sliderStyle.HighIndicator);
             }
         }
 

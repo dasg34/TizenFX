@@ -87,9 +87,6 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public CircularPaginationStyle(CircularPaginationStyle style) : base(style)
         {
-            if (null == style) return;
-
-            this.CopyFrom(style);
         }
 
         /// <summary>

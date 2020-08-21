@@ -78,11 +78,6 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public LoadingStyle(LoadingStyle style) : base(style)
         {
-            if(null == style)
-            {
-                return;
-            }
-            this.CopyFrom(style);
         }
 
         /// <summary>

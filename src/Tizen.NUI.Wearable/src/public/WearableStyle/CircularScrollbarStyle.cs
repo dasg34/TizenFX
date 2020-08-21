@@ -98,7 +98,6 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public CircularScrollbarStyle(CircularScrollbarStyle style) : base(style)
         {
-            this.CopyFrom(style);
         }
 
         /// <summary>
@@ -161,23 +160,6 @@ namespace Tizen.NUI.Wearable
 
 
         #region Methods
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void CopyFrom(BindableObject bindableObject)
-        {
-            base.CopyFrom(bindableObject);
-
-            var style = bindableObject as CircularScrollbarStyle;
-
-            if (null != style)
-            {
-                Thickness = style.Thickness;
-                TrackSweepAngle = style.TrackSweepAngle;
-                TrackColor = style.TrackColor;
-                ThumbColor = style.ThumbColor;
-            }
-        }
 
         private void Initialize()
         {

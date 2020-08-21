@@ -60,9 +60,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ControlStyle(ControlStyle style) : base(style)
         {
-            if(null == style) return;
-
-            this.CopyFrom(style);
         }
 
         /// <summary>

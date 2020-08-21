@@ -120,9 +120,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DropDownStyle(DropDownStyle style) : base(style)
         {
-            if(null == style) return;
-
-            this.CopyFrom(style);
         }
 
         /// <summary>
@@ -213,24 +210,17 @@ namespace Tizen.NUI.Components
             set => SetValue(ListPaddingProperty, value);
         }
 
-        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void CopyFrom(BindableObject bindableObject)
         {
             base.CopyFrom(bindableObject);
 
-            DropDownStyle dropDownStyle = bindableObject as DropDownStyle;
-
-            if (null != dropDownStyle)
+            if (bindableObject is DropDownStyle dropDownStyle)
             {
-                Button?.CopyFrom(dropDownStyle.Button);
-                HeaderText?.CopyFrom(dropDownStyle.HeaderText);
-                ListBackgroundImage?.CopyFrom(dropDownStyle.ListBackgroundImage);
-                SpaceBetweenButtonTextAndIcon = dropDownStyle.SpaceBetweenButtonTextAndIcon;
-                ListRelativeOrientation = dropDownStyle.ListRelativeOrientation;
-                ListMargin?.CopyFrom(dropDownStyle.ListMargin);
-                SelectedItemIndex = dropDownStyle.SelectedItemIndex;
-                ListPadding?.CopyFrom(dropDownStyle.ListPadding);
+                Button.CopyFrom(dropDownStyle.Button);
+                HeaderText.CopyFrom(dropDownStyle.HeaderText);
+                ListBackgroundImage.CopyFrom(dropDownStyle.ListBackgroundImage);
             }
         }
 
@@ -270,9 +260,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DropDownItemStyle(DropDownItemStyle style) : base(style)
         {
-            if(null == style) return;
-
-            this.CopyFrom(style);
         }
 
         /// <summary>
@@ -315,19 +302,17 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IsSelected { get; set; }
 
-        /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
+        /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void CopyFrom(BindableObject bindableObject)
         {
             base.CopyFrom(bindableObject);
 
-            DropDownItemStyle dropDownItemStyle = bindableObject as DropDownItemStyle;
-
-            if (null != dropDownItemStyle)
+            if (bindableObject is DropDownItemStyle dropDownItemStyle)
             {
-                Text?.CopyFrom(dropDownItemStyle.Text);
-                Icon?.CopyFrom(dropDownItemStyle.Icon);
-                CheckImage?.CopyFrom(dropDownItemStyle.CheckImage);
+                Text.CopyFrom(dropDownItemStyle.Text);
+                Icon.CopyFrom(dropDownItemStyle.Icon);
+                CheckImage.CopyFrom(dropDownItemStyle.CheckImage);
                 CheckImageGapToBoundary = dropDownItemStyle.CheckImageGapToBoundary;
                 IsSelected = dropDownItemStyle.IsSelected;
             }

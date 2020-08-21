@@ -110,7 +110,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ScrollbarStyle(ScrollbarStyle style) : base(style)
         {
-            this.CopyFrom(style);
         }
 
         /// <summary>
@@ -179,24 +178,6 @@ namespace Tizen.NUI.Components
 
 
         #region Methods
-
-        /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void CopyFrom(BindableObject bindableObject)
-        {
-            base.CopyFrom(bindableObject);
-
-            var style = bindableObject as ScrollbarStyle;
-
-            if (null != style)
-            {
-                TrackThickness = style.TrackThickness;
-                ThumbThickness = style.ThumbThickness;
-                TrackColor = style.TrackColor;
-                ThumbColor = style.ThumbColor;
-                TrackPadding = style.TrackPadding;
-            }
-        }
 
         private void Initialize()
         {

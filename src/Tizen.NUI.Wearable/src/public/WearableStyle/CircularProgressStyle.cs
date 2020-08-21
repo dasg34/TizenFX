@@ -130,8 +130,6 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public CircularProgressStyle(CircularProgressStyle style) : base(style)
         {
-            if (null == style) return;
-            this.CopyFrom(style);
         }
 
         /// <summary>
@@ -243,29 +241,6 @@ namespace Tizen.NUI.Wearable
             set
             {
                 SetValue(IsEnabledProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Style's clone function.
-        /// </summary>
-        /// <param name="bindableObject">The style that need to copy.</param>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override void CopyFrom(BindableObject bindableObject)
-        {
-            base.CopyFrom(bindableObject);
-
-            CircularProgressStyle progressStyle = bindableObject as CircularProgressStyle;
-
-            if (null != progressStyle)
-            {
-                isEnabled = progressStyle.isEnabled;
-                thickness = progressStyle.Thickness;
-                maxValue = progressStyle.maxValue;
-                minValue = progressStyle.minValue;
-                currentValue = progressStyle.currentValue;
-                trackColor = progressStyle.trackColor;
-                progressColor = progressStyle.progressColor;
             }
         }
 

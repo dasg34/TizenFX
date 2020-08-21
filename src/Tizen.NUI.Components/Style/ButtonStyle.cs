@@ -127,32 +127,24 @@ namespace Tizen.NUI.Components
         /// <since_tizen> 8 </since_tizen>
         public ButtonStyle(ButtonStyle style) : base(style)
         {
-            if(style == null)
-            {
-                return;
-            }
-
-            InitSubStyle();
-
-            this.CopyFrom(style);
         }
         /// <summary>
         /// Overlay image's Style.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle Overlay { get; set; }
+        public ImageViewStyle Overlay { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Text's Style.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public TextLabelStyle Text { get; set; }
+        public TextLabelStyle Text { get; set; } = new TextLabelStyle();
 
         /// <summary>
         /// Icon's Style.
         /// </summary>
         /// <since_tizen> 8 </since_tizen>
-        public ImageViewStyle Icon { get; set; }
+        public ImageViewStyle Icon { get; set; } = new ImageViewStyle();
 
         /// <summary>
         /// Flag to decide Button can be selected or not.
@@ -231,24 +223,11 @@ namespace Tizen.NUI.Components
         {
             base.CopyFrom(bindableObject);
 
-            ButtonStyle buttonStyle = bindableObject as ButtonStyle;
-
-            if (null != buttonStyle)
+            if (bindableObject is ButtonStyle buttonStyle)
             {
-                if (null != buttonStyle.Overlay)
-                {
-                    Overlay?.CopyFrom(buttonStyle.Overlay);
-                }
-
-                if (null != buttonStyle.Text)
-                {
-                    Text?.CopyFrom(buttonStyle.Text);
-                }
-
-                if (null != buttonStyle.Icon)
-                {
-                    Icon?.CopyFrom(buttonStyle.Icon);
-                }
+                Overlay.CopyFrom(buttonStyle.Overlay);
+                Text.CopyFrom(buttonStyle.Text);
+                Icon.CopyFrom(buttonStyle.Icon);
             }
         }
 

@@ -57,12 +57,6 @@ namespace Tizen.NUI.Wearable
         [EditorBrowsable(EditorBrowsableState.Never)]
         public PopupStyle(PopupStyle style) : base(style)
         {
-            if (null == style)
-            {
-                return;
-            }
-            initSubStyle();
-            CopyFrom(style);
         }
 
         /// <summary>

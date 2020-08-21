@@ -57,8 +57,6 @@ namespace Tizen.NUI.Components
         [EditorBrowsable(EditorBrowsableState.Never)]
         public ToastStyle(ToastStyle style) : base(style)
         {
-            InitSubStyle();
-            this.CopyFrom(style);
         }
 
         /// <summary>
@@ -75,23 +73,17 @@ namespace Tizen.NUI.Components
         /// Text's Style.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public TextLabelStyle Text { get; set; }
+        public TextLabelStyle Text { get; set; } = new TextLabelStyle();
 
-        /// <summary>
-        /// Style's clone function.
-        /// </summary>
-        /// <param name="bindableObject">The style that need to copy.</param>
+        /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void CopyFrom(BindableObject bindableObject)
         {
             base.CopyFrom(bindableObject);
-            ToastStyle toastStyle = bindableObject as ToastStyle;
-            if (toastStyle != null)
+
+            if (bindableObject is ToastStyle toastStyle)
             {
-                if (null != toastStyle.Text)
-                {
-                    Text?.CopyFrom(toastStyle.Text);
-                }
+                Text.CopyFrom(toastStyle.Text);
             }
         }
 

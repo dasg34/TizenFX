@@ -31,7 +31,7 @@ namespace Tizen.NUI.BaseComponents
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class Selector<T>
     {
-        private readonly bool cloneable = typeof(T).IsAssignableFrom(typeof(ICloneable));
+        private readonly bool cloneable = typeof(ICloneable).IsAssignableFrom(typeof(T));
 
         /// <summary>
         /// The list for adding state-value pair.

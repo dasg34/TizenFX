@@ -119,7 +119,7 @@ namespace Tizen.NUI.Components
                     throw new InvalidOperationException($"{style} already be used");
                 }
 
-                ThemeMap[key][style] = styleBase.GetViewStyle();
+                ThemeMap[key].AddStyleWithoutClone(style, styleBase.GetViewStyle());
             }
         }
 
@@ -136,7 +136,7 @@ namespace Tizen.NUI.Components
                 return null;
             }
 
-            return (ThemeManager.CurrentTheme?.GetStyle(style) ?? ThemeManager.DefaultTheme?.GetStyle(style))?.Clone();
+            return ThemeManager.GetStyle(style);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Tizen.NUI.Components
                 return;
             }
 
-            ThemeMap[key][component.Name] = (Activator.CreateInstance(style) as StyleBase).GetViewStyle();
+            ThemeMap[key].AddStyleWithoutClone(component.Name, (Activator.CreateInstance(style) as StyleBase).GetViewStyle());
         }
 
         /// <summary>

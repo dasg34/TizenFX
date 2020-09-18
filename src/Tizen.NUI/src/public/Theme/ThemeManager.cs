@@ -84,7 +84,7 @@ namespace Tizen.NUI
 
         internal static Theme DefaultTheme
         {
-            get => BuiltinThemes?[0];
+            get => BuiltinThemes?[0] ?? new Theme();
         }
 
         private static List<Theme> BuiltinThemes
@@ -178,11 +178,11 @@ namespace Tizen.NUI
                 throw new ArgumentNullException(nameof(styleName));
             }
 
-            return CurrentTheme?.GetStyle(styleName)?.Clone();
+            return (CurrentTheme.GetStyle(styleName) ?? DefaultTheme.GetStyle(styleName))?.Clone();
         }
 
         /// <summary>
-        /// Load a style for a View in the current theme.
+        /// Load a style with View type in the current theme.
         /// </summary>
         /// <param name="viewType">The type of View</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -199,7 +199,7 @@ namespace Tizen.NUI
             do
             {
                 if (currentType.Equals(typeof(Tizen.NUI.BaseComponents.View))) break;
-                resultStyle = GetStyle(currentType.Name)?.Clone();
+                resultStyle = GetStyle(currentType.Name);
                 currentType = currentType.BaseType;
             }
             while (resultStyle == null && currentType != null);

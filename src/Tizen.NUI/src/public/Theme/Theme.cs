@@ -78,14 +78,13 @@ namespace Tizen.NUI
         public string Id { get; set; }
 
         /// <summary>
-        /// For XAML.
+        /// For Xaml use only.
         /// The bulit-in theme id that will be used as base of this.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public string BasedOn
+        internal string BasedOn
         {
             get => baseTheme;
-            internal set
+            set
             {
                 baseTheme = value;
 
@@ -108,15 +107,12 @@ namespace Tizen.NUI
             }
         }
 
-        /// <summary>Gets the number of steyls contained in the theme.</summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public int Count => map.Count;
-
         /// <summary>
+        /// For Xaml use only.
         /// Note that it is not a normal indexer.
         /// Setter will merge the new value with existing item.
         /// </summary>
-        public ViewStyle this[string styleName]
+        internal ViewStyle this[string styleName]
         {
             get => map[styleName];
             set
@@ -171,7 +167,7 @@ namespace Tizen.NUI
         /// <param name="styleName">The style name to add.</param>
         /// <param name="value">The style instance to add.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void AddStyle(string styleName, ViewStyle value) => map[styleName] = value;
+        public void AddStyle(string styleName, ViewStyle value) => map[styleName] = value?.Clone();
 
 
         /// <inheritdoc/>
@@ -185,7 +181,7 @@ namespace Tizen.NUI
 
             foreach (var item in this)
             {
-                result[item.Key] = item.Value?.Clone();
+                result.AddStyle(item.Key, item.Value);
             }
             return result;
         }
@@ -225,5 +221,10 @@ namespace Tizen.NUI
                 }
             }
         }
+
+        /// <summary>
+        /// Internal use only.
+        /// </summary>
+        internal void AddStyleWithoutClone(string styleName, ViewStyle value) => map[styleName] = value;
     }
 }

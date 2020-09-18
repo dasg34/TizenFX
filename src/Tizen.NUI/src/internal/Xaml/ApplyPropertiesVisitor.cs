@@ -757,6 +757,6 @@ namespace Tizen.NUI.Xaml
             return true;
         }
 
-        private PropertyInfo GetIndexer(object source, Type keyType, Type valueType) => source.GetType().GetProperties().FirstOrDefault(p => p.Name == "Item" && p.PropertyType.IsAssignableFrom(valueType) && p.GetIndexParameters().Length != 0 && p.GetIndexParameters()[0].ParameterType == keyType);
+        private PropertyInfo GetIndexer(object source, Type keyType, Type valueType) => source.GetType().GetProperties(BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic).FirstOrDefault(p => p.Name == "Item" && p.PropertyType.IsAssignableFrom(valueType) && p.GetIndexParameters().Length != 0 && p.GetIndexParameters()[0].ParameterType == keyType);
     }
 }

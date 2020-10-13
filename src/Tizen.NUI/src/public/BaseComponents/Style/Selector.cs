@@ -25,6 +25,7 @@ namespace Tizen.NUI.BaseComponents
     /// <summary>
     /// Selector class, which is related by Control State, it is base class for other Selector.
     /// </summary>
+    /// <typeparam name="T">The property type of the selector. if it's reference type, it should be of type <see cref="ICloneable"/> that implement deep copy in <see cref="ICloneable.Clone"/>.</typeparam>
     /// <since_tizen> 6 </since_tizen>
     /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -79,7 +80,6 @@ namespace Tizen.NUI.BaseComponents
         {
             Clone(value);
         }
-
 
         /// <summary>
         /// All State.
@@ -265,7 +265,7 @@ namespace Tizen.NUI.BaseComponents
 
         /// <summary>
         /// Clone itself.
-        /// If type T implements ICloneable, it calls Clone() method to clone values, otherwise use operator=.
+        /// If type T implements ISelectorItem, it calls Clone() method to clone values, otherwise use operator=.
         /// </summary>
         /// <since_tizen> 6 </since_tizen>
         /// This will be public opened in tizen_6.0 after ACR done. Before ACR, need to be hidden as inhouse API.

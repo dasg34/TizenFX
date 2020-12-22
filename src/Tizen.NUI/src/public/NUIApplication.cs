@@ -24,6 +24,8 @@ using Tizen.Applications;
 using Tizen.Applications.CoreBackend;
 using Tizen.NUI.Binding;
 using Tizen.NUI.Xaml;
+using Tizen.Applications.ThemeManager;
+using System.Collections.Generic;
 
 namespace Tizen.NUI
 {
@@ -43,6 +45,7 @@ namespace Tizen.NUI
         private TransitionOptions transitionOptions;
 
         private static bool isPreLoad = false;
+        private readonly ThemeLoader themeLoader = new ThemeLoader();
 
         /// <summary>
         /// The default constructor.
@@ -51,6 +54,7 @@ namespace Tizen.NUI
         public NUIApplication() : base(new NUICoreBackend())
         {
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
         }
 
         /// <summary>
@@ -64,6 +68,7 @@ namespace Tizen.NUI
         public NUIApplication(Size2D windowSize, Position2D windowPosition) : base(new NUICoreBackend("", WindowMode.Opaque, windowSize, windowPosition))
         {
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
             _windowSize2D = windowSize;
             _windowPosition2D = windowPosition;
         }
@@ -76,6 +81,7 @@ namespace Tizen.NUI
         public NUIApplication(string styleSheet) : base(new NUICoreBackend(styleSheet))
         {
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
         }
 
         /// <summary>
@@ -90,6 +96,7 @@ namespace Tizen.NUI
         public NUIApplication(string styleSheet, Size2D windowSize, Position2D windowPosition) : base(new NUICoreBackend(styleSheet, WindowMode.Opaque, windowSize, windowPosition))
         {
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
             _windowSize2D = windowSize;
             _windowPosition2D = windowPosition;
         }
@@ -103,6 +110,7 @@ namespace Tizen.NUI
         public NUIApplication(string styleSheet, WindowMode windowMode) : base(new NUICoreBackend(styleSheet, windowMode))
         {
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
         }
 
         /// <summary>
@@ -118,6 +126,7 @@ namespace Tizen.NUI
         public NUIApplication(string styleSheet, WindowMode windowMode, Size2D windowSize, Position2D windowPosition) : base(new NUICoreBackend(styleSheet, windowMode, windowSize, windowPosition))
         {
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
             _windowSize2D = windowSize;
             _windowPosition2D = windowPosition;
         }
@@ -142,6 +151,7 @@ namespace Tizen.NUI
             if (windowSize != null) { _windowSize2D = windowSize; }
             if (windowPosition != null) { _windowPosition2D = windowPosition; }
             Registry.Instance.SavedApplicationThread = Thread.CurrentThread;
+            themeLoader.ThemeChanged += TizenThemeChanged;
         }
 
         /// <summary>
@@ -412,6 +422,27 @@ namespace Tizen.NUI
             {
                 transitionOptions = value;
             }
+        }
+        private void TizenThemeChanged(object sender, ThemeEventArgs e)
+        {
+            string prefix = "/theme/";
+
+            Dictionary<string, string> changedResources = new Dictionary<string, string>();
+            foreach (string key in ThemeManager.DefaultTheme.Resources.Keys)
+            {
+                Tizen.Log.Error("LYJ,theme", $"key : {prefix + key}");
+                string newValue = null;
+                try
+                {
+                    newValue = e.Theme.GetString(prefix + key);
+                }
+                catch { }
+                if (newValue != null)
+                {
+                    changedResources[key] = newValue;
+                }
+            }
+            ThemeManager.UpdateCurrentThemeResources(changedResources);
         }
 
         /// <summary>

@@ -621,11 +621,11 @@ namespace Tizen.NUI
                                                          " top:" + _layoutPositionData.Top +
                                                          " right:" + _layoutPositionData.Right +
                                                          " bottom:" + _layoutPositionData.Bottom);
-                /*
+
                 Container onwerContainer = Owner.GetParent();
                 View onwerView = onwerContainer is Layer ? new View(Layer.getCPtr(onwerContainer).Handle, false) : onwerContainer as View;
-                */
-                if (/*onwerView != null && onwerView.Layout != null && onwerView.Layout.LayoutWithTransition*/ false)
+
+                if (onwerView != null && onwerView.Layout != null && onwerView.Layout.LayoutWithTransition)
                 {
                     NUIApplication.GetDefaultWindow().LayoutController.AddTransitionDataEntry(_layoutPositionData);
                 }

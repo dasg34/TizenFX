@@ -190,10 +190,9 @@ namespace Tizen.NUI
 
         private (float, float) CalculateChildrenSize(float parentWidth, float parentHeight)
         {
-            (LayoutLength suggestedMinimumWidth, LayoutLength suggestedMinimumHeight) = GetSuggestedMinimumSize();
-            int minWidth = (int)suggestedMinimumWidth.AsDecimal();
+            int minWidth = (int)SuggestedMinimumWidth.AsDecimal();
             int maxWidth = (int)parentWidth;
-            int minHeight = (int)suggestedMinimumHeight.AsDecimal();
+            int minHeight = (int)SuggestedMinimumHeight.AsDecimal();
             int maxHeight = (int)parentHeight;
 
             // Find minimum size that satisfy all constraints

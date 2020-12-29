@@ -195,9 +195,8 @@ namespace Tizen.NUI.Components
                 totalHeight = heightSizeAndState.Size.AsDecimal();
 
                 // Ensure layout respects it's given minimum size
-                (LayoutLength suggestedMinimumWidth, LayoutLength suggestedMinimumHeight) = GetSuggestedMinimumSize();
-                totalWidth = Math.Max(totalWidth, suggestedMinimumWidth.AsDecimal());
-                totalHeight = Math.Max(totalHeight, suggestedMinimumHeight.AsDecimal());
+                totalWidth = Math.Max(totalWidth, SuggestedMinimumWidth.AsDecimal());
+                totalHeight = Math.Max(totalHeight, SuggestedMinimumHeight.AsDecimal());
 
                 widthSizeAndState.State = childWidthState;
                 heightSizeAndState.State = childHeightState;

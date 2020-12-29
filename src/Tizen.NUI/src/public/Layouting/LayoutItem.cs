@@ -437,36 +437,6 @@ namespace Tizen.NUI
             }
         }
 
-        internal (LayoutLength width, LayoutLength height) GetSuggestedMinimumSize()
-        {
-            Size2D maximumsize = Owner.MaximumSize;
-            Size2D minimumsize = Owner.MinimumSize;
-            Vector3 naturalSize = Owner.NaturalSize;
-
-            float maximumWidth = maximumsize.Width;
-            float maximumHeight = maximumsize.Height;
-            float minimumWidth = minimumsize.Width;
-            float minimumHeight = minimumsize.Height;
-            float naturalWidth = naturalSize.Width;
-            float naturalHeight = naturalSize.Height;
-
-            float baseHeight = maximumHeight > 0 ? Math.Min(maximumHeight, naturalHeight) : naturalHeight;
-            float baseWidth = Owner.GetWidthForHeight(baseHeight);
-
-            float suggestedMinimumWidth = Math.Max(baseWidth, minimumWidth);
-
-            suggestedMinimumWidth = maximumWidth > 0 ? Math.Min(suggestedMinimumWidth, maximumWidth) : suggestedMinimumWidth;
-
-            baseWidth = maximumWidth > 0 ? Math.Min(maximumWidth, naturalWidth) : naturalWidth;
-            baseHeight = Owner.GetHeightForWidth(baseWidth);
-
-            float suggestedMinimumHeight = Math.Max(baseHeight, minimumHeight);
-            suggestedMinimumHeight = maximumHeight > 0 ? Math.Min(suggestedMinimumHeight, maximumHeight) : suggestedMinimumHeight;
-
-
-            return (new LayoutLength(suggestedMinimumWidth), new LayoutLength(suggestedMinimumHeight));
-        }
-
         /// <summary>
         /// Sets the minimum width of the layout.<br />
         /// It is not guaranteed the layout will be able to achieve this minimum width (for example, if its parent
@@ -555,9 +525,8 @@ namespace Tizen.NUI
         protected virtual void OnMeasure(MeasureSpecification widthMeasureSpec, MeasureSpecification heightMeasureSpec)
         {
             // GetDefaultSize will limit the MeasureSpec to the suggested minimumWidth and minimumHeight
-            (LayoutLength suggestedMinimumWidth, LayoutLength suggestedMinimumHeight) = GetSuggestedMinimumSize();
-            SetMeasuredDimensions(GetDefaultSize(suggestedMinimumWidth, widthMeasureSpec),
-                                   GetDefaultSize(suggestedMinimumHeight, heightMeasureSpec));
+            SetMeasuredDimensions(GetDefaultSize(SuggestedMinimumWidth, widthMeasureSpec),
+                                   GetDefaultSize(SuggestedMinimumHeight, heightMeasureSpec));
         }
 
         internal virtual void OnMeasureIndependentChildren(MeasureSpecification widthMeasureSpec, MeasureSpecification heightMeasureSpec) { }

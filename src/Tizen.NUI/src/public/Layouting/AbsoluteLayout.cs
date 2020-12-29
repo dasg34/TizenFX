@@ -40,8 +40,10 @@ namespace Tizen.NUI
         protected override void OnMeasure(MeasureSpecification widthMeasureSpec, MeasureSpecification heightMeasureSpec)
         {
             // Ensure layout respects it's given minimum size
-            float maxWidth = SuggestedMinimumWidth.AsDecimal();
-            float maxHeight = SuggestedMinimumHeight.AsDecimal();
+            (LayoutLength suggestedMinimumWidth, LayoutLength suggestedMinimumHeight) = GetSuggestedMinimumSize();
+            float maxWidth = suggestedMinimumWidth.AsDecimal();
+            float maxHeight = suggestedMinimumHeight.AsDecimal();
+
 
             MeasuredSize.StateType childWidthState = MeasuredSize.StateType.MeasuredSizeOK;
             MeasuredSize.StateType childHeightState = MeasuredSize.StateType.MeasuredSizeOK;

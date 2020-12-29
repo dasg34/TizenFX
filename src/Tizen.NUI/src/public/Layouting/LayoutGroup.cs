@@ -411,8 +411,9 @@ namespace Tizen.NUI
             if (0 == LayoutChildren.Count)
             {
                 // Must be a leaf as has no children
-                measuredWidth = GetDefaultSize(SuggestedMinimumWidth, widthMeasureSpec);
-                measuredHeight = GetDefaultSize(SuggestedMinimumHeight, heightMeasureSpec);
+                (LayoutLength suggestedMinimumWidth, LayoutLength suggestedMinimumHeight) = GetSuggestedMinimumSize();
+                measuredWidth = GetDefaultSize(suggestedMinimumWidth, widthMeasureSpec);
+                measuredHeight = GetDefaultSize(suggestedMinimumHeight, heightMeasureSpec);
             }
 
             SetMeasuredDimensions(new MeasuredSize(measuredWidth, MeasuredSize.StateType.MeasuredSizeOK),
